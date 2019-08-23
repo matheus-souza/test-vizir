@@ -1,3 +1,5 @@
 cd ./laradock
 docker-compose up -d nginx
+docker-compose exec --user=laradock workspace composer install
+docker-compose exec --user=laradock workspace npm install
 docker-compose exec --user=laradock workspace bash
