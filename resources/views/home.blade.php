@@ -34,40 +34,54 @@
         @endif
 
         <div class="container">
-            <div class="row">
-                <div class="col-6 mt-5">
-                    <form class="form-inline">
-                        <div class="form-group col-12">
-                            <label for="origem">Origem</label>
-                            <select id="origem" class="form-control mx-sm-3 col-8">
-                                <option>Select padrão</option>
-                            </select>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-6 mt-5">
-                    <form class="form-inline">
-                        <div class="form-group col-12">
-                            <label for="destino">Destino</label>
-                            <select id="destino" class="form-control mx-sm-3 col-8">
-                                <option>Select padrão</option>
-                            </select>
-                        </div>
-                    </form>
+            <form class="col-12" action="{{ route('valorchamada') }}" method="POST">
+                @csrf
+
+                <div class="row mt-5">
+                    <div class="col-3 d-inline-flex">
+                        <label class="my-1 mr-2" for="origem">Origem</label>
+                        <select class="col-10" name="origem">
+                            @foreach($origens as $origem)
+                                <option value="{{ $origem }}">{{ $origem }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="col-3 d-inline-flex">
+                        <label class="my-1 mr-2" for="destino">Destino</label>
+                        <select class="col-10" name="destino">
+                            @foreach($destinos as $destino)
+                                <option value="{{ $destino }}">{{ $destino }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="col-2 d-inline-flex" style="height: 28px">
+                        <label class="my-1 mr-2" for="tempo">Tempo</label>
+                        <input class="form-control col-8 h-100" type="time" name="tempo" style="border: 1px solid #aaa" required>
+                    </div>
+
+                    <div class="col-3 d-inline-flex">
+                        <label class="my-1 mr-2" for="plano">Plano</label>
+                        <select class="col-10" name="plano" value="{{ old('plano') }}">
+                            @foreach($planos as $id => $plano)
+                                <option value="{{ $id }}">{{ $plano }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
 
-
-            </div>
+                <div class="row justify-content-center mt-3">
+                    <button type="submit" class="btn btn-primary my-1 btn-lg">Calcular</button>
+                </div>
+            </form>
         </div>
 
-        <div class="container">
-
+        <div class="container fixed-bottom">
             <hr>
-
             <footer>
                 <p>&copy; Matheus Henrique de Souza 2019</p>
             </footer>
         </div>
-
     </body>
 </html>
