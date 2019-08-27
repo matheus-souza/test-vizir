@@ -24,6 +24,15 @@
             </button>
         </nav>
 
+        @if(session()->has('error'))
+            <div class="alert alert-danger alert-dismissible fade show mt-3 ml-3 mr-3" role="alert">
+                {{ session()->get('error') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+
         <div class="container">
             <div class="row">
                 <div class="col-6 mt-5">
