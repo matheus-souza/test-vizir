@@ -33,6 +33,50 @@
             </div>
         @endif
 
+        @if($mensagem = Session::get('success'))
+            <div id="modalResultado" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Modal dados da chamada" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="TituloModalCentralizado">Dados da chamada</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Origem</th>
+                                        <th scope="col">Destino</th>
+                                        <th scope="col">Tempo</th>
+                                        <th scope="col">Plano FaleMais</th>
+                                        <th scope="col">Com FaleMais</th>
+                                        <th scope="col">Sem FaleMais</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{ $mensagem['origem'] }}</td>
+                                        <td>{{ $mensagem['destino'] }}</td>
+                                        <td>{{ $mensagem['tempo'] }}</td>
+                                        <td>{{ $mensagem['plano'] }}</td>
+                                        <td>$ {{ number_format($mensagem['valor_com_plano'], 2, ',', '.') }}</td>
+                                        <td>$ {{ number_format($mensagem['valor_sem_plano'], 2, ',', '.') }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer align-items-center">
+                            <button type="button" class="btn btn-dark mr-auto ml-auto" data-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+
+
+
         <div class="container">
             <form class="col-12" action="{{ route('valorchamada') }}" method="POST">
                 @csrf
