@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', 'HomeController@index')->name('home');
+
+Route::post('/valorchamada', 'CustoChamadaController@consultaValor')->name('valorchamada');
