@@ -6,6 +6,8 @@
 
 require('./bootstrap');
 
+window.select2 = require('select2')
+
 window.Vue = require('vue');
 
 /**
@@ -27,6 +29,12 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app',
+// const app = new Vue({
+//     el: '#app',
+// });
+
+//Set select2
+$(document).ready(function() {
+    $('select').select2();
+    $('div[id^=\"modal\"]').modal();
 });
