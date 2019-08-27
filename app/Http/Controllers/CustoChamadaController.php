@@ -84,6 +84,12 @@ class CustoChamadaController extends Controller
         //
     }
 
+    /**
+     * Calcula o valor da chamada a partir da origem, destino, plano e tempo
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function consultaValor(Request $request)
     {
         $custoChamada = CustoChamada::where('origem', $request->origem)
@@ -94,7 +100,7 @@ class CustoChamadaController extends Controller
 
         $plano = Plano::find($request->plano);
 
-        $valorMinutosExcedentes = $custoChamada->valor_minuto + ($custoChamada->valor_minuto * ($plano->porcentagem_acrescimo/100));
+        $valorMinutosExcedentes = $custoChamada->valor_minuto + ($custoChamada->valor_minuto * ($plano->porcentagem_acrescimo / 100));
 
         $minutosExcedentes = $this->time_to_decimal($request->tempo) - $plano->minutos_gratis;
         if ($minutosExcedentes > 0)
@@ -102,17 +108,16 @@ class CustoChamadaController extends Controller
 
         $valorPagoSemPlano = $this->time_to_decimal($request->tempo) * $custoChamada->valor_minuto;
 
-//        redirect()->route('login');
-//        back()->with(
         return redirect()->route('home')->with(
-            ['success' => [
-                'origem' => $request->origem,
-                'destino' => $request->destino,
-                'tempo' => $request->tempo,
-                'plano' => $plano->descricao,
-                'valor_com_plano' => $valorPagoComPlano ?? 0,
-                'valor_sem_plano' => $valorPagoSemPlano,
-            ]
+            [
+                'success' => [
+                    'origem' => $request->origem,
+                    'destino' => $request->destino,
+                    'tempo' => $request->tempo,
+                    'plano' => $plano->descricao,
+                    'valor_com_plano' => $valorPagoComPlano ?? 0,
+                    'valor_sem_plano' => $valorPagoSemPlano,
+                ]
             ]
         );
     }
