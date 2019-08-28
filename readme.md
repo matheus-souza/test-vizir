@@ -27,7 +27,8 @@ Execute o arquivo run
 ```
 
 ## Rodando os testes
-Após executar o arquivo ```run``` estará logado no container ```workspace```, nele você poderá utilizar o comando ```vendor/bin/phpunit --testdox``` para a execução dos testes  
+Após executar o arquivo ```run``` estará logado no container ```workspace```, nele você poderá utilizar o comando ```vendor/bin/phpunit --testdox``` para a execução dos testes
+Obs.: Se rodar os testes precisa recriar a base com a massa de dados inicial com o comando ```php artisan migrate:refresh --seed```
 
 ## Acesso pelo navegador
 Após executar o projeto conforme a documentação acesse [localhost](http://localhost) para ter acesso as telas do projeto
